@@ -1,0 +1,36 @@
+name: Rust
+
+on: 
+  push:
+    tags:
+    - '*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 20.X
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+    - name: Install dependencies
+      run: sudo apt install clang pkg-config libssl-dev
+    - name: Switch to nightly
+      run: rustup default nightly
+    - name: Add target WASM to rustup
+      run: rustup target add wasm32-unknown-unknown
+    - name: Install cargo-leptos
+      run: cargo install cargo-leptos
+    - name: Build
+      run: cargo leptos build --release
+    - name: Generate compressed files
+      run: tar -zcf alice-site.tar.gz --transform 's|^\./target/site|site|' --transform 's|^\./target/release/alice-site|alice-site|' ./target/site ./target/release/alice-site
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "alice-site.tar.gz"
