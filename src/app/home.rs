@@ -50,11 +50,7 @@ fn Navigation() -> impl IntoView {
 fn Social() -> impl IntoView {
     let links: Vec<_> = [
         ("https://github.com/alice39", "/github-icon.png", "invert"),
-        (
-            "https://discord.gg/tuUNq6nMet",
-            "/discord-icon.png",
-            "rounded-[50%]",
-        ),
+        ("", "/discord-icon.png", "rounded-[50%]"),
     ]
     .into_iter()
     .map(|link| {
@@ -180,11 +176,7 @@ fn Contact() -> impl IntoView {
 
         <p>
             <span>"Reach out to me via Discord in "</span>
-            <a
-                target="_blank"
-                href="https://discord.gg/tuUNq6nMet"
-                class="text-blue-500 hover:text-blue-300"
-            >
+            <a target="_blank" href="" class="text-blue-500 hover:text-blue-300">
                 "this discord server"
             </a>
             <span>
