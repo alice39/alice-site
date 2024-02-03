@@ -4,21 +4,27 @@ use leptos_use::use_timestamp;
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
-        <div class="w-screen h-screen flex items-center justify-center p-4 space-x-4 bg-cover bg-[url('/background.gif')]">
-            <div class="w-[70%] h-[85%] max-w-[900px] max-h-[740px] flex flex-col">
+        <div class="w-screen h-screen flex items-center justify-center p-4 space-x-4 bg-cover bg-[url('/background.gif')] overflow-x-hidden">
+            <div class="sm:w-[70%] h-[85%] max-w-[900px] max-h-[740px] flex flex-col">
                 <div class="h-[60px] flex justify-between">
                     <Navigation/>
                     <Social/>
                 </div>
 
-                <div class="my-2"></div>
+            <div class="my-2"></div>
 
-                <div class="h-[calc(100%-60px)]">
+            <div class="w-full justify-between flex flex-row block sm:hidden">
+               <ProfileIconWidget/>
+               <TimeWidget/>
+            </div>
+
+            <div class="my-2"></div>
+                <div class="sm:h-[calc(100%-60px)]">
                     <Overview/>
                 </div>
             </div>
 
-            <div class="w-fit h-ful flex flex-col space-y-4">
+            <div class="w-fit h-ful flex flex-col space-y-4 hidden sm:block">
                 <ProfileIconWidget/>
                 <TimeWidget/>
             </div>
